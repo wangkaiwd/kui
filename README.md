@@ -5,3 +5,6 @@
 * [`jsx next`](https://github.com/vuejs/jsx-next)
 
 ### 了解`vue cli`的`tsconfig.json`配置项
+
+### 知识点
+* [`.npmrc`](https://docs.npmjs.com/cli/v7/configuring-npm/npmrc)

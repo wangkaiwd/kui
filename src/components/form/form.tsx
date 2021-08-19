@@ -1,4 +1,5 @@
-import { defineComponent, PropType, toRefs } from 'vue';
+import { defineComponent, PropType, reactive, toRefs } from 'vue';
+import { isEmpty } from '@/shared/helper';
 
 interface RuleItem {
   required?: boolean
@@ -20,14 +21,20 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
+    const errors = reactive<Record<string, string>>({});
     const validate = () => {
       if (props.model && props.rules) {
         Object.keys(props.model).forEach(key => {
           const value = props.model![key];
-          const rule = props.rules![key];
+          const ruleItems = props.rules![key];
+          ruleItems.forEach(rule => {
+            if (rule.required && isEmpty(value)) {
+              errors[key] = rule.message;
+            }
+          });
         });
+        console.log('errors', errors);
       }
-
     };
     return () => <div class="k-form">{slots.default?.()}</div>;
   }
