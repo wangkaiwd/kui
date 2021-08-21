@@ -2,8 +2,12 @@
 
 ### 需求分析
 
+#### component
 * form: handle all form item
 * formItem: handle single form item
+  
+### form validate
+* think form validate logic
 
 ### 知识点
 
