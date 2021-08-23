@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <input-demo></input-demo>
+    <form-demo></form-demo>
   </div>
 </template>
 
@@ -10,10 +10,11 @@ import KForm from '@/components/form/form';
 import KFormItem from '@/components/form/formItem';
 import KInput from '@/components/input/input';
 import InputDemo from '@/components/input/demo.vue';
+import FormDemo from '@/components/form/demo.vue';
 
 export default defineComponent({
   name: 'App',
-  components: { InputDemo, KInput, KFormItem, KForm },
+  components: { FormDemo, InputDemo, KInput, KFormItem, KForm },
 });
 </script>
 

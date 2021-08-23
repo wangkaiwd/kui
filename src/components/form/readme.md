@@ -7,6 +7,15 @@
 * form: handle all form item
 * formItem: handle single form item
 
+#### formItem
+
+* customLabel: slot label to customize label
+* input change how to notify formItem component validate value, think two resolve schema:
+  * `vue2`: mounted $on + recursive $parent
+    * [formItem `instance.$on('validate',validateFn)`](https://github.com/wangkaiwd/js-deep/blob/5016bf9254e9f374633c549a8a6970408119d0b0/advanced/vue-usage/vue-components/src/components/el-form/el-form-item.vue#L30-L34)
+    * [input recursive find $parent which name is `FormItem` and call `$parent.$emit('validate',value)`](https://github.com/wangkaiwd/js-deep/blob/5016bf9254e9f374633c549a8a6970408119d0b0/advanced/vue-usage/vue-components/src/components/el-form/el-input.vue#L26-L40)
+  * `vue3`: provide + inject
+
 ### form validate
 
 * think form validate logic
