@@ -1,5 +1,6 @@
-import { defineComponent } from 'vue';
+import { defineComponent, provide } from 'vue';
 import './formItem.less';
+import { formItemKey, FormItemProvide } from '@/components/form/types';
 
 export default defineComponent({
   name: 'KFormItem',
@@ -12,9 +13,21 @@ export default defineComponent({
     }
   },
   setup (props, { slots }) {
-    const validate = () => {
-
+    const validate = (value: any) => {
+      console.log('validate');
     };
+    const onControlInputChange = (value: any) => {
+      console.log('input');
+      validate(value);
+    };
+    const onControlBlurChange = (value: any) => {
+      console.log('blur');
+      validate(value);
+    };
+    provide<FormItemProvide>(formItemKey, {
+      onControlInputChange,
+      onControlBlurChange
+    });
     return () => (
       <div class="k-form-item">
         <div class="k-form-item-content-wrapper">

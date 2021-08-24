@@ -39,3 +39,4 @@ const validate = (formData, rules) => {
 ### 知识点
 
 * [optional chaining(?.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+* [provide/inject](https://v3.vuejs.org/guide/composition-api-provide-inject.html#provide-inject)

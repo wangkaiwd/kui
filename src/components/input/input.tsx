@@ -1,4 +1,5 @@
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, inject, ref } from 'vue';
+import { formItemKey, FormItemProvide } from '@/components/form/types';
 
 export default defineComponent({
   name: 'KInput',
@@ -23,9 +24,20 @@ export default defineComponent({
     const onInput = (e: Event) => {
       const value = (e.target as HTMLInputElement).value;
       emit('update:modelValue', value);
+      if (formItemProvide) {
+        formItemProvide.onControlInputChange(value);
+      }
     };
+    const onBlur = (e: Event) => {
+      const value = (e.target as HTMLInputElement).value;
+      emit('update:modelValue', value);
+      if (formItemProvide) {
+        formItemProvide.onControlBlurChange(value);
+      }
+    };
+    const formItemProvide = inject<FormItemProvide>(formItemKey);
     return () => (
-      <input {...attrs} type="text" value={props.modelValue} onInput={onInput}/>
+      <input {...attrs} type="text" value={props.modelValue} onInput={onInput} onBlur={onBlur}/>
     );
   }
 });
