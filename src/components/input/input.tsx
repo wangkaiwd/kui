@@ -1,5 +1,5 @@
 import { computed, defineComponent, inject, ref } from 'vue';
-import { formItemKey, FormItemProvide } from '@/components/form/types';
+import { FormItemKey, FormItemContext } from '@/components/form/types';
 
 export default defineComponent({
   name: 'KInput',
@@ -21,21 +21,15 @@ export default defineComponent({
     //     emit('update:modelValue', val);
     //   }
     // });
+    const formItemContext = inject<FormItemContext>(FormItemKey);
     const onInput = (e: Event) => {
       const value = (e.target as HTMLInputElement).value;
       emit('update:modelValue', value);
-      if (formItemProvide) {
-        formItemProvide.onControlInputChange(value);
-      }
+      formItemContext?.onControlInputChange(value);
     };
-    const onBlur = (e: Event) => {
-      const value = (e.target as HTMLInputElement).value;
-      emit('update:modelValue', value);
-      if (formItemProvide) {
-        formItemProvide.onControlBlurChange(value);
-      }
+    const onBlur = () => {
+      formItemContext?.onControlBlurChange(props.modelValue);
     };
-    const formItemProvide = inject<FormItemProvide>(formItemKey);
     return () => (
       <input {...attrs} type="text" value={props.modelValue} onInput={onInput} onBlur={onBlur}/>
     );
