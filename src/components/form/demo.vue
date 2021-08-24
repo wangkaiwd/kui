@@ -2,6 +2,10 @@
   <div class="demo-box">
     <k-form>
       <k-form-item label="姓名">
+        <!--  custom label      -->
+        <!--        <template #label>
+                  <h2>hhhh</h2>
+                </template>-->
         <k-input></k-input>
       </k-form-item>
     </k-form>

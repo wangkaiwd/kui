@@ -27,10 +27,18 @@ export default defineComponent({
       onControlInputChange,
       onControlBlurChange
     });
+    const renderLabel = () => {
+      if (slots.label) {
+        return <div class="k-form-item-label">{slots.label()}</div>;
+      }
+      if (props.label) {
+        return <div class="k-form-item-label">{props.label}:</div>;
+      }
+    };
     return () => (
       <div class="k-form-item">
         <div class="k-form-item-content-wrapper">
-          {props.label && <div class="k-form-item-label">{props.label}</div>}
+          {renderLabel()}
           <div class="k-form-item-body">
             {slots.default?.()}
           </div>
