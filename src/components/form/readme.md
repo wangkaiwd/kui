@@ -18,6 +18,8 @@
 
 ### form validate
 
+> [`async-validator`](https://github.com/yiminghe/async-validator)
+
 * think form validate logic
 
 ```ts
@@ -40,3 +42,4 @@ const validate = (formData, rules) => {
 
 * [optional chaining(?.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
 * [provide/inject](https://v3.vuejs.org/guide/composition-api-provide-inject.html#provide-inject)
+* how to invoke child component method: `addItem` and `removeItem` ?

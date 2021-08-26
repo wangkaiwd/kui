@@ -1,14 +1,5 @@
-import { defineComponent, PropType, reactive, toRefs } from 'vue';
-import { isEmpty } from '@/shared/helper';
-
-interface RuleItem {
-  required?: boolean
-  message: string
-}
-
-interface Rules {
-  [key: string]: RuleItem[]
-}
+import { defineComponent, getCurrentInstance, PropType, reactive, toRefs } from 'vue';
+import { KRules } from '@/components/form/types';
 
 export default defineComponent({
   name: 'KForm',
@@ -17,24 +8,14 @@ export default defineComponent({
       type: Object
     },
     rules: {
-      type: Object as PropType<Rules>
+      type: Object as PropType<KRules>
     }
   },
   setup (props, { slots }) {
-    const errors = reactive<Record<string, string>>({});
+    const instance = getCurrentInstance();
+    console.log('instance', instance);
     const validate = () => {
-      if (props.model && props.rules) {
-        Object.keys(props.model).forEach(key => {
-          const value = props.model![key];
-          const ruleItems = props.rules![key];
-          ruleItems.forEach(rule => {
-            if (rule.required && isEmpty(value)) {
-              errors[key] = rule.message;
-            }
-          });
-        });
-        console.log('errors', errors);
-      }
+
     };
     return () => <div class="k-form">{slots.default?.()}</div>;
   }

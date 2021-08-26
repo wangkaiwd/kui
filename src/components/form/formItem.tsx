@@ -1,6 +1,6 @@
 import { computed, defineComponent, PropType, provide, reactive } from 'vue';
 import './formItem.less';
-import { FormItemKey, FormItemContext, KRuleItem, KRules, KRuleTrigger } from '@/components/form/types';
+import { FormItemKey, FormItemContext, KRuleItem, KRule, KRuleTrigger } from '@/components/form/types';
 import Schema from 'async-validator';
 import { ValidateError } from 'async-validator/dist-types/interface';
 
@@ -17,7 +17,7 @@ export default defineComponent({
       type: String
     },
     rules: {
-      type: [Object, Array] as PropType<KRules>
+      type: [Object, Array] as PropType<KRule>
     }
   },
   setup (props, { slots }) {

@@ -15,4 +15,6 @@ export interface KRuleItem extends RuleItem {
   trigger?: KRuleTrigger
 }
 
-export type KRules = KRuleItem | KRuleItem[]
+export type KRule = KRuleItem | KRuleItem[]
+
+export type KRules = Record<string, KRule>
