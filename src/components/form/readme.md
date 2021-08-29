@@ -42,4 +42,8 @@ const validate = (formData, rules) => {
 
 * [optional chaining(?.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
 * [provide/inject](https://v3.vuejs.org/guide/composition-api-provide-inject.html#provide-inject)
-* how to invoke child component method: `addItem` and `removeItem` ?
+* how to invoke child component method: (provide/inject)`addItem` and `removeItem` ?
+  * execute slots to get type props(not ideally)
+  * provide/inject
+* [template refs](https://v3.vuejs.org/guide/composition-api-template-refs.html)
+  * [expose api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0042-expose-api.md#summary)

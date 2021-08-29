@@ -25,10 +25,10 @@ export default defineComponent({
     const onInput = (e: Event) => {
       const value = (e.target as HTMLInputElement).value;
       emit('update:modelValue', value);
-      formItemContext?.onControlInputChange(value);
+      formItemContext?.onControlInputChange?.(value);
     };
     const onBlur = () => {
-      formItemContext?.onControlBlurChange(props.modelValue);
+      formItemContext?.onControlBlurChange?.(props.modelValue);
     };
     return () => (
       <input {...attrs} type="text" value={props.modelValue} onInput={onInput} onBlur={onBlur}/>
