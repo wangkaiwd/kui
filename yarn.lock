@@ -10088,7 +10088,7 @@
   "resolved" "https://registry.nlark.com/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2 || ^3.0.0-0", "vue@^2.x", "vue@^3.0.0", "vue@^3.0.0-0", "vue@^3.0.1":
+"vue@^2 || ^3.0.0-0", "vue@^2.x", "vue@^3.0.0-0", "vue@^3.0.1", "vue@^3.2.0":
   "integrity" "sha1-2U2IZ15BwFDTpyLQhIpwY7XoemA="
   "resolved" "https://registry.nlark.com/vue/download/vue-3.2.4.tgz"
   "version" "3.2.4"
