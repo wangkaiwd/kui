@@ -1,14 +1,19 @@
 <template>
   <div class="k-tab-demo">
     <k-tab v-model="activeKey">
-      <k-tab-pane></k-tab-pane>
+      <k-tab-pane name="a" tab="a">
+        this is a
+      </k-tab-pane>
+      <k-tab-pane name="b" tab="b">
+        this is b
+      </k-tab-pane>
     </k-tab>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue';
-import KTab from '@/components/tabs/tab.vue';
+import KTab from '@/components/tabs/tabs.vue';
 import KTabPane from '@/components/tabs/tab-pane.vue';
 
 export default defineComponent({
