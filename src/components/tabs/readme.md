@@ -4,8 +4,14 @@
 
 1. 渲染`tab`以及对应的`content`
 2. 切换
+3. custom tab pane title by slot
+4. bottom line of tabs
 
 ### 使用方式
+
+### `problem`
+
+* onBeforeUnmount vs onBeforeUnmount in composition api
 
 ### 参考
 

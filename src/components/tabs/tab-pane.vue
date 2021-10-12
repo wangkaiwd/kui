@@ -5,9 +5,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, onMounted, onUnmounted, reactive, toRefs } from 'vue';
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue';
 import { TabsContext, TabsKey } from '@/components/tabs/types';
-import { uuid } from '@/shared/uuid';
 
 export default defineComponent({
   name: 'KTabPane',
@@ -23,18 +22,15 @@ export default defineComponent({
   setup (props) {
     // only when parent execute provide and provide property's name is TabsKey tabsContext still would have value
     const tabsContext = inject<TabsContext>(TabsKey);
-    const id = uuid('k-tab-pane');
-    console.log('tabsContext', tabsContext?.modelValue);
     const paneVisible = computed(() => tabsContext?.modelValue?.value === props.name);
     onMounted(() => {
       tabsContext?.addItem({
-        id,
         name: props.name,
         tab: props.tab
       });
     });
-    onUnmounted(() => {
-      tabsContext?.removeItem(id);
+    onBeforeUnmount(() => {
+      tabsContext?.removeItem(props.name);
     });
     return {
       paneVisible

@@ -1,8 +1,8 @@
 <template>
   <div class="k-tabs">
-    <div class="k-tabs-headers">
+    <div class="k-tabs-navs">
       <div @click="onChange(item)" class="k-tabs-title" :class="{active: item.name === modelValue}"
-           v-for="item in items" :key="item.id">
+           v-for="item in items" :key="item.name">
         {{ item.tab }}
       </div>
     </div>
@@ -26,8 +26,8 @@ export default defineComponent({
     const addItem = (item: TabPaneContext) => {
       items.value.push(item);
     };
-    const removeItem = (id: string) => {
-      const index = items.value.findIndex((item) => item.id === id);
+    const removeItem = (name: string) => {
+      const index = items.value.findIndex((item) => item.name === name);
       if (index !== -1) {
         items.value.splice(index, 1);
       }
@@ -49,7 +49,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .k-tabs {
-  .k-tabs-headers {
+  .k-tabs-navs {
     display: flex;
   }
   .k-tabs-title {

@@ -7,11 +7,10 @@ export interface TabsContext {
 
   addItem (item: TabPaneContext): void
 
-  removeItem (id: string): void
+  removeItem (name: string): void
 }
 
 export interface TabPaneContext {
-  id: string
   name: string
   tab?: string
 }
