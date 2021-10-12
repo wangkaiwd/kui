@@ -1,7 +1,9 @@
+import { Ref } from 'vue';
+
 export const TabsKey = 'KTabs';
 
 export interface TabsContext {
-  modelValue?: string
+  modelValue?: Ref<string | undefined>
 
   addItem (item: TabPaneContext): void
 
@@ -9,7 +11,7 @@ export interface TabsContext {
 }
 
 export interface TabPaneContext {
-  id: number
+  id: string
   name: string
-  tab: string
+  tab?: string
 }

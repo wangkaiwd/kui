@@ -1,10 +1,10 @@
 <template>
   <div class="k-tab-demo">
-    <k-tab v-model="activeKey">
-      <k-tab-pane name="a" tab="a">
+    <k-tab v-model="activeKey" @change="onChange">
+      <k-tab-pane name="a" tab="tabA" @click="onClick">
         this is a
       </k-tab-pane>
-      <k-tab-pane name="b" tab="b">
+      <k-tab-pane name="b" tab="tabB">
         this is b
       </k-tab-pane>
     </k-tab>
@@ -15,6 +15,7 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import KTab from '@/components/tabs/tabs.vue';
 import KTabPane from '@/components/tabs/tab-pane.vue';
+import { TabPaneContext } from '@/components/tabs/types';
 
 export default defineComponent({
   name: 'KTabDemo',
@@ -23,8 +24,17 @@ export default defineComponent({
     const state = reactive({
       activeKey: 'a'
     });
+    const onClick = () => {
+      console.log('click');
+    };
+    const onChange = (item: TabPaneContext) => {
+      console.log('item', item);
+      console.log('state', { ...state });
+    };
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      onClick,
+      onChange
     };
   },
 });
