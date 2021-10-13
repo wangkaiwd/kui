@@ -19,14 +19,16 @@ export default defineComponent({
       type: String
     }
   },
-  setup (props) {
+  setup (props, { slots }) {
+    console.log('slots', slots);
     // only when parent execute provide and provide property's name is TabsKey tabsContext still would have value
     const tabsContext = inject<TabsContext>(TabsKey);
     const paneVisible = computed(() => tabsContext?.modelValue?.value === props.name);
     onMounted(() => {
       tabsContext?.addItem({
         name: props.name,
-        tab: props.tab
+        tab: props.tab,
+        tabSlot: slots.tab
       });
     });
     onBeforeUnmount(() => {

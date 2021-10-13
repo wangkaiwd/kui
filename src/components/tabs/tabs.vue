@@ -1,9 +1,16 @@
 <template>
   <div class="k-tabs">
     <div class="k-tabs-navs">
-      <div @click="onChange(item)" class="k-tabs-title" :class="{active: item.name === modelValue}"
-           v-for="item in items" :key="item.name">
-        {{ item.tab }}
+      <div
+        @click="onChange(item)"
+        class="k-tabs-title"
+        :class="{active: item.name === modelValue}"
+        v-for="item in items" :key="item.name"
+      >
+        <component v-if="item.tabSlot" :is="item.tabSlot" v-bind="item"></component>
+        <template v-else>
+          {{ item.tab }}
+        </template>
       </div>
     </div>
     <slot></slot>

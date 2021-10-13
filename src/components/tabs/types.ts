@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import { Ref, Slot } from 'vue';
 
 export const TabsKey = 'KTabs';
 
@@ -13,4 +13,5 @@ export interface TabsContext {
 export interface TabPaneContext {
   name: string
   tab?: string
+  tabSlot?: Slot
 }

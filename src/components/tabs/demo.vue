@@ -1,10 +1,16 @@
 <template>
   <div class="k-tab-demo">
     <k-tab v-model="activeKey" @change="onChange">
-      <k-tab-pane name="a" tab="tabA" @click="onClick">
+      <k-tab-pane name="a" @click="onClick">
+        <template #tab="item">
+          <button>{{ item.name }}-slot</button>
+        </template>
         this is a
       </k-tab-pane>
       <k-tab-pane name="b" tab="tabB">
+        <template #tab="item">
+          <button style="background-color: #116db5;">{{ item.name }}-slot</button>
+        </template>
         this is b
       </k-tab-pane>
     </k-tab>
