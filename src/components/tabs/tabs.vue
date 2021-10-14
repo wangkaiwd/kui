@@ -1,12 +1,12 @@
 <template>
   <div class="k-tabs">
-    <div class="k-tabs-navs">
+    <div class="k-tabs-navs" ref="navsRef">
       <div
         @click="onChange(item)"
         class="k-tabs-title"
         :class="{active: item.name === modelValue}"
         v-for="(item,i) in items" :key="item.name"
-        :ref="(el,otherRef) => setItemRef(el,i)"
+        :ref="(el) => setItemRef(el,i)"
       >
         <component v-if="item.tabSlot" :is="item.tabSlot" v-bind="item"></component>
         <template v-else>
@@ -20,7 +20,18 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, onMounted, provide, reactive, ref, toRef, toRefs } from 'vue';
+import {
+  computed,
+  defineComponent,
+  nextTick,
+  onBeforeUpdate,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+  toRef,
+  toRefs
+} from 'vue';
 import { TabPaneContext, TabsContext, TabsKey } from '@/components/tabs/types';
 
 export default defineComponent({
@@ -33,6 +44,7 @@ export default defineComponent({
   setup (props, { emit }) {
     const items = ref<TabPaneContext[]>([]);
     let activeRef: HTMLDivElement | null = null;
+    const navsRef = ref<HTMLDivElement | null>(null);
     const lineRef = ref<HTMLDivElement | null>(null);
     const activeIndex = computed(() => {
       const index = items.value.findIndex((item) => item.name === props.modelValue);
@@ -62,19 +74,25 @@ export default defineComponent({
     const calculateLinePosition = () => {
       // vue source: theory of nextTick
       nextTick(() => { // must in execute in nextTick callback, otherwise can't get activeRef
-        if (activeRef && lineRef.value) {
-          const { width } = activeRef.getBoundingClientRect();
-          lineRef.value.style.left = width * activeIndex.value + 'px';
+        // activeRef can get by dom api (classList.contains('.active'))
+        if (navsRef.value && activeRef && lineRef.value) {
+          const { left: l1 } = navsRef.value.getBoundingClientRect();
+          const { left: l2, width } = activeRef.getBoundingClientRect();
+          const l = l2 - l1;
+          lineRef.value.style.left = l + 'px';
           lineRef.value.style.width = width + 'px';
         }
       });
     };
-    onMounted(() => {
-      calculateLinePosition();
+    // make sure to reset ref before each update
+    onBeforeUpdate(() => {
+      activeRef = null;
     });
+    onMounted(calculateLinePosition);
     return {
       items,
       onChange,
+      navsRef,
       lineRef,
       setItemRef
     };

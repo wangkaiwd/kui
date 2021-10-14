@@ -28,7 +28,7 @@ export default defineComponent({
   components: { KTabPane, KTab },
   setup () {
     const state = reactive({
-      activeKey: 'a'
+      activeKey: 'b'
     });
     const onClick = () => {
       console.log('click');

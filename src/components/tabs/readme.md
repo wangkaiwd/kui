@@ -18,4 +18,4 @@
 * [setup arguments](https://v3.vuejs.org/guide/composition-api-setup.html#arguments)
   * `props` destructure will lose reactivity
   * render function will use `expose` to provide public api for `template refs`
-* [v-for Array Refs](https://v3.vuejs.org/guide/migration/array-refs.html#migration-strategy)
+* [Usage inside v-for](https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for)
