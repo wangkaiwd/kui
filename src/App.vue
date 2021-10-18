@@ -1,7 +1,8 @@
 <template>
   <div class="app">
     <!--    <form-demo></form-demo>-->
-    <k-tab-demo></k-tab-demo>
+    <!--    <k-tab-demo></k-tab-demo>-->
+    <k-tree-demo></k-tree-demo>
   </div>
 </template>
 
@@ -13,10 +14,11 @@ import KInput from '@/components/input/input';
 import InputDemo from '@/components/input/demo.vue';
 import FormDemo from '@/components/form/demo.vue';
 import KTabDemo from '@/components/tabs/demo.vue';
+import KTreeDemo from '@/components/tree/demo.vue';
 
 export default defineComponent({
   name: 'App',
-  components: { KTabDemo, FormDemo, InputDemo, KInput, KFormItem, KForm },
+  components: { KTreeDemo, KTabDemo, FormDemo, InputDemo, KInput, KFormItem, KForm },
 });
 </script>
 
