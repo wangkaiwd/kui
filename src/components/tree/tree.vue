@@ -1,6 +1,7 @@
 <template>
   <div class="k-tree">
-    <k-tree-node :item="item" v-for="item in dataSource" :key="item.key">
+    <k-tree-node :expand-keys="expandKeys" @expand="handleExpand" :item="item" v-for="item in dataSource"
+                 :key="item.key">
       {{ item.title }}
     </k-tree-node>
   </div>
@@ -8,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, reactive, toRefs } from 'vue';
-import { DataProps } from './types';
+import { DataProps, PlainArray } from './types';
 import KTreeNode from '@/components/tree/node.vue';
 
 export default defineComponent({
@@ -17,13 +18,22 @@ export default defineComponent({
   props: {
     dataSource: {
       type: Array as PropType<DataProps[]>,
-      default: []
+      default: () => []
+    },
+    expandKeys: {
+      type: Array as PropType<(string | number)[]>,
+      default: () => []
     }
   },
-  setup () {
+  setup (props, { emit }) {
     const state = reactive({});
+    const handleExpand = (expandKeys: PlainArray) => {
+      // this is lower case
+      emit('update:expand-keys', expandKeys);
+    };
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      handleExpand
     };
   },
 });

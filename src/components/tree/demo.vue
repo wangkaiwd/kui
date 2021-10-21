@@ -1,6 +1,6 @@
 <template>
   <div class="k-tree-demo">
-    <k-tree :data-source="dataSource"></k-tree>
+    <k-tree :data-source="dataSource" v-model:expand-keys="expandKeys"></k-tree>
   </div>
 </template>
 
@@ -14,8 +14,10 @@ export default defineComponent({
   components: { KTree },
   setup () {
     const dataSource = ref(treeData);
+    const expandKeys = ref([]);
     return {
-      dataSource
+      dataSource,
+      expandKeys
     };
   },
 });

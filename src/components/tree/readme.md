@@ -5,4 +5,4 @@
 * display recursively
 * expand/collapse
   * animation
-* selectable?
+* lazy-load

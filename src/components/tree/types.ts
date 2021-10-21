@@ -3,3 +3,5 @@ export interface DataProps {
   title: string
   children?: DataProps[]
 }
+
+export type PlainArray = (string | number)[] 
