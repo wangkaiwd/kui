@@ -14,6 +14,7 @@ import { defineComponent, ref } from 'vue';
 import KTree from './tree.vue';
 import { treeData } from '@/components/tree/test-data';
 
+// todo: add vue3 new define emit props for tree component
 export default defineComponent({
   name: 'KTreeDemo',
   components: { KTree },
