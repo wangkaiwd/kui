@@ -14,3 +14,6 @@
 1. recursive render: element ui
 2. flatten tree and add level property to set indent: ant design
   1. implement big data easily ?
+
+### issue
+* optimize recursively listen expand custom event

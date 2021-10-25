@@ -1,6 +1,11 @@
 <template>
   <div class="k-tree-demo">
-    <k-tree :data-source="dataSource" v-model:expand-keys="expandKeys"></k-tree>
+    <k-tree
+      :data-source="dataSource"
+      v-model:expand-keys="expandKeys"
+      v-model:checked-keys="checkedKeys"
+    >
+    </k-tree>
   </div>
 </template>
 
@@ -15,9 +20,11 @@ export default defineComponent({
   setup () {
     const dataSource = ref(treeData);
     const expandKeys = ref([]);
+    const checkedKeys = ref(['0-0-0']);
     return {
       dataSource,
-      expandKeys
+      expandKeys,
+      checkedKeys
     };
   },
 });
