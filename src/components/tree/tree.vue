@@ -4,6 +4,7 @@
       :expand-keys="expandKeys"
       :checked-keys="checkedKeys"
       @expand="handleExpand"
+      @check="handleCheck"
       :item="item"
       v-for="item in dataSource"
       :key="item.key"
@@ -46,9 +47,14 @@ export default defineComponent({
       emit('update:expand-keys', expandKeys);
       emit('expand', expandKeys, item);
     };
+    const handleCheck = (checkedKeys: PlainArray, item: DataProps) => {
+      emit('update:checked-keys', checkedKeys);
+      emit('check', checkedKeys, item);
+    };
     return {
       ...toRefs(state),
-      handleExpand
+      handleExpand,
+      handleCheck
     };
   },
 });

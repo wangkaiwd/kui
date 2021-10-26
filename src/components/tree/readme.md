@@ -6,6 +6,7 @@
 * expand/collapse
   * animation
 * check
+  * checkStrictly
 * lazy load
 * big data render(think)
 

@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import KTree from './tree.vue';
 import { treeData } from '@/components/tree/test-data';
 
@@ -22,6 +22,9 @@ export default defineComponent({
     const dataSource = ref(treeData);
     const expandKeys = ref([]);
     const checkedKeys = ref(['0-0-0']);
+    watch(() => checkedKeys.value, (newValue, oldValue) => {
+      console.log('mewValue', newValue, oldValue);
+    });
     return {
       dataSource,
       expandKeys,

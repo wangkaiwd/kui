@@ -5,7 +5,7 @@
         {{ arrow }}
       </div>
       <div class="check">
-        <input type="checkbox" :checked="checked">
+        <input ref="inputRef" @change="onCheckChange" type="checkbox" :checked="checked">
       </div>
       <slot></slot>
     </div>
@@ -17,6 +17,7 @@
         :checked-keys="checkedKeys"
         :expand-keys="expandKeys"
         v-for="child in item.children"
+        @check="handleCheck"
         :key="child.key"
       >
         {{ child.title }}
@@ -26,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { DataProps, PlainArray } from '@/components/tree/types';
 
 export default defineComponent({
@@ -49,6 +50,7 @@ export default defineComponent({
     }
   },
   setup (props, { emit }) {
+    const inputRef = ref<HTMLInputElement | null>(null);
     const expanded = computed(() => {
       const { expandKeys, item } = props;
       if (!item) {
@@ -59,11 +61,31 @@ export default defineComponent({
     const arrow = computed(() => {
       return expanded.value ? '⬇' : '>';
     });
+    const processHalfCheck = () => {
+      if (!props.item.children?.length) {
+        if (inputRef.value) {
+          inputRef.value.indeterminate = false;
+        }
+        return;
+      }
+      if (!isAllChildrenChecked.value && !isAllChildrenUnChecked.value) {
+        if (inputRef.value) {
+          inputRef.value.indeterminate = true;
+        }
+      } else {
+        if (inputRef.value) {
+          inputRef.value.indeterminate = false;
+        }
+      }
+    };
     const checked = computed(() => {
       const { checkedKeys, item, parent } = props;
-      console.log('checkedKeys', checkedKeys, item, parent);
+      processHalfCheck();
       if (parent) {
         return checkedKeys.includes(item.key) || checkedKeys.includes(parent.key);
+      }
+      if (isAllChildrenChecked.value) { // all children checked, parent checked
+        return true;
       }
       return checkedKeys.includes(item.key);
     });
@@ -82,12 +104,37 @@ export default defineComponent({
     const handleExpand = (expandKeys: PlainArray, item: DataProps) => {
       emit('expand', expandKeys, item);
     };
+    const onCheckChange = () => {
+      const checkedKeysCopy = [...props.checkedKeys];
+      if (checked.value) { // if checked, should cancel check and cancel all children check status and change parent check status
+        const newCheckedKeys = checkedKeysCopy.filter(key => key !== props.item.key);
+        handleCheck(newCheckedKeys);
+      } else {
+        checkedKeysCopy.push(props.item.key);
+        handleCheck(checkedKeysCopy);
+      }
+    };
+    // 1. check 2. uncheck 3. indeterminate: must set via javascript
+    const isAllChildrenChecked = computed(() => {
+      const { children } = props.item;
+      return children?.every((child) => props.checkedKeys.includes(child.key));
+    });
+    const isAllChildrenUnChecked = computed(() => {
+      const { children } = props.item;
+      return children?.every((child) => !props.checkedKeys.includes(child.key));
+    });
+    const handleCheck = (checkedKeys: PlainArray) => {
+      emit('check', checkedKeys, props.item);
+    };
     return {
+      inputRef,
       arrow,
       checked,
       expanded,
       onExpand,
-      handleExpand
+      handleExpand,
+      onCheckChange,
+      handleCheck
     };
   },
 });
