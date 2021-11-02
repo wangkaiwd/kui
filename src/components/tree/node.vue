@@ -104,10 +104,18 @@ export default defineComponent({
     const handleExpand = (expandKeys: PlainArray, item: DataProps) => {
       emit('expand', expandKeys, item);
     };
+    const updateTreeUp = () => {
+
+    };
+    const updateTreeDown = () => {
+      
+    };
     const onCheckChange = () => {
       const checkedKeysCopy = [...props.checkedKeys];
       if (checked.value) { // if checked, should cancel check and cancel all children check status and change parent check status
+        // recursive update parent
         const newCheckedKeys = checkedKeysCopy.filter(key => key !== props.item.key);
+        // recursive update children
         handleCheck(newCheckedKeys);
       } else {
         checkedKeysCopy.push(props.item.key);
